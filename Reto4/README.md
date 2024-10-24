@@ -48,4 +48,6 @@ with zipfile.ZipFile(local_zip_path, 'r') as zip_ref:
 
 print("Archivos extraídos exitosamente.")
 csv_file_path = os.path.join(unzip_folder, 'all_energy_statistics.csv')
+
+df = pd.read_csv(csv_file_path)
 ```
