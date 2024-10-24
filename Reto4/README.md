@@ -24,3 +24,28 @@ Eres un analista que trabaja en una organización no gubernamental (ONG) que inf
 * ¿Cómo están cambiando estas tendencias de producción, consumo, importación y exportación a lo largo del tiempo?
 
 **Contexto analítico.** Los datos están almacenados en un gran archivo CSV que contiene información sobre la producción y consumo de energía por país y año. Vas a: 1) dividir los datos en archivos CSV resumidos para compartir con tus colegas; 2) manipular los datos para crear más categorías a partir de las columnas existentes; 3) encontrar los principales actores en diferentes categorías, incluyendo la exportación total de energía y la producción total por tipo (por ejemplo, nuclear); y finalmente 4) encontrar tendencias en los datos, como los países con el crecimiento más rápido en la producción de energía.
+
+```python
+import requests
+import zipfile
+import os
+
+local_zip_path = "all_energy_statistics.zip"  # Guardar el ZIP localmente
+
+# Descargar el archivo
+response = requests.get("https://github.com/dhcastrog/Bootcamp_BG/raw/refs/heads/main/Reto4/all_energy_statistics.zip")
+with open(local_zip_path, 'wb') as file:
+    file.write(response.content)
+
+print("ZIP descargado exitosamente.")
+
+unzip_folder = 'unzipped_data'
+os.makedirs(unzip_folder, exist_ok=True)
+
+# Step 3: Extraer el archivo ZIP
+with zipfile.ZipFile(local_zip_path, 'r') as zip_ref:
+    zip_ref.extractall(unzip_folder)
+
+print("Archivos extraídos exitosamente.")
+csv_file_path = os.path.join(unzip_folder, 'all_energy_statistics.csv')
+```
